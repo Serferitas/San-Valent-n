@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Elsa Judith 💘 Mi Amor - Con Scroll</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Great+Vibes&family=Sacramento&family=Parisienne&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET SUAVE CON SCROLL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: 'Poppins', sans-serif;
+            background: #590d22;
+            padding: 16px 12px;
+            overflow-x: hidden;
+            overflow-y: auto; /* ✅ SCROLL ACTIVADO */
+            position: relative;
+        }
+
+        /* Fondo fijo pero contenido con scroll */
+        .background-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 40%, #a4133c, #590d22, #2d0a1a);
+            z-index: -2;
+        }
+
+        .background-fixed::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 77, 109, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Corazones de fondo fijos */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 28px;
+            user-select: none;
+            text-shadow: 0 0 15px rgba(255, 77, 109, 0.3);
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL CON SCROLL ===== */
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto 20px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tarjetas - ahora con altura automática (sin scroll interno) */
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1.8px solid rgba(255, 255, 255, 0.35);
+            border-radius: 48px;
+            padding: 32px 22px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        /* ===== PÁGINA FINAL - CON SCROLL AUTOMÁTICO ===== */
+        #finalPage {
+            display: none;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border-radius: 48px;
+            padding: 32px 22px;
+            border: 1.8px solid rgba(255, 255, 255, 0.4);
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+
+        /* NOMBRE */
+        .name-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.6rem;
+            color: white;
+            text-shadow: 0 0 25px #ffb3c1, 0 0 50px #ff4d6d;
+            margin-bottom: 2px;
+            line-height: 1;
+        }
+
+        .subname {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: white;
+            letter-spacing: 5.5px;
+            text-transform: uppercase;
+            background: rgba(201, 24, 74, 0.35);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            border: 1.2px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 15px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* MARCO IMAGEN */
+        .image-frame {
+            width: 170px;
+            height: 170px;
+            margin: 8px auto 18px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #fff, #ffb3c1, #ff4d6d);
+            box-shadow: 0 20px 35px rgba(201, 24, 74, 0.6);
+        }
+
+        .gif-love {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            display: block;
+        }
+
+        /* TEXTO PROPUESTA */
+        .proposal-text {
+            font-size: 1.45rem;
+            color: white;
+            font-weight: 600;
+            margin: 15px 0 20px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 18px 12px;
+            border-radius: 40px;
+            line-height: 1.5;
+        }
+
+        .san-valentin {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.2rem;
+            color: #fff6f7;
+            text-shadow: 0 0 35px #ffd700, 0 0 60px #ff4d6d;
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* BOTONES - GRANDES */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 15px 0 5px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 28px;
+            border-radius: 70px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            letter-spacing: 2px;
+            min-width: 150px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        #siBtn {
+            background: linear-gradient(145deg, #ff4d6d, #c9184a);
+            color: white;
+            border: 2px solid #fff6f7;
+        }
+
+        #noBtn {
+            background: rgba(255, 255, 255, 0.92);
+            color: #c9184a;
+            border: 2px solid #ff4d6d;
+        }
+
+        /* FIRMA */
+        .signature {
+            margin-top: 22px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: white;
+            border-top: 1.5px solid rgba(255, 255, 255, 0.3);
+            padding-top: 18px;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===== DEDICATORIA CON SCROLL ===== */
+        .final-msg {
+            font-family: 'Parisienne', cursive;
+            font-size: 3.4rem;
+            color: white;
+            text-shadow: 0 0 35px #ffd700, 0 0 70px #ff4d6d;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .final-image-frame {
+            width: 160px;
+            height: 160px;
+            margin: 10px auto 15px;
+            border-radius: 30px;
+            padding: 5px;
+            background: linear-gradient(145deg, #fff, #ffb3c1, #ff4d6d);
+            box-shadow: 0 18px 35px rgba(201, 24, 74, 0.7);
+            overflow: hidden;
+        }
+
+        .final-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+            border: 4px solid white;
+        }
+
+        /* ✅ DEDICATORIA HERMOSA - CON SCROLL AUTOMÁTICO */
+        .dedicatoria-completa {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 30px 22px;
+            border-radius: 40px;
+            margin: 20px 0 15px;
+            border: 3px solid #ff4d6d;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+        .poema-titulo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.3rem;
+            color: #c9184a;
+            margin-bottom: 18px;
+            border-bottom: 2px dashed #ffb3c1;
+            padding-bottom: 12px;
+        }
+
+        .mensaje-largo {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #1e0b13;
+            text-align: center;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .destacado-rosa {
+            background: linear-gradient(145deg, #ffe6e9, #ffb3c1);
+            padding: 18px;
+            border-radius: 25px;
+            margin: 22px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #a4133c;
+            border: 2px solid #ff4d6d;
+        }
+
+        .promesa-amor {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.2rem;
+            color: #ff4d6d;
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 2px solid #ffb3c1;
+        }
+
+        .firma-final {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.1rem;
+            color: white;
+            text-shadow: 0 0 25px #ff4d6d;
+            margin-top: 20px;
+        }
+
+        .fecha-especial {
+            margin-top: 20px;
+            color: white;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            background: rgba(201,24,74,0.35);
+            padding: 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .card, #finalPage { padding: 28px 18px; }
+            .name-title { font-size: 3.2rem; }
+            .san-valentin { font-size: 2.9rem; }
+            .final-msg { font-size: 3rem; }
+            .mensaje-largo { font-size: 1.15rem; }
+        }
+
+        @media (max-width: 360px) {
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo fijo -->
+    <div class="background-fixed"></div>
+    
+    <!-- Corazones de fondo -->
+    <div class="hearts-background" id="heartsBg"></div>
+
+    <!-- CONTENEDOR PRINCIPAL CON SCROLL -->
+    <div class="container">
+        <!-- TARJETA DE PREGUNTA -->
+        <div id="askPage" class="card">
+            <h1 class="name-title">Elsa Judith</h1>
+            <div class="subname">Gómez Vega</div>
+            
+            <div class="image-frame">
+                <img src="1.jpeg" 
+                     alt="Amor" 
+                     class="gif-love"
+                     onerror="this.src='https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif'">
+            </div>
+
+            <div class="proposal-text">
+                ¿Me harías el honor de ser mi 
+                <span class="san-valentin">San Valentín?</span>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn" id="siBtn">💖 ¡SÍ, ACEPTO!</button>
+                <button class="btn" id="noBtn">😢 No</button>
+            </div>
+            
+            <div class="signature">
+                Con todo mi corazón, Jeremy Sebastian
+            </div>
+        </div>
+
+        <!-- TARJETA DE RESPUESTA - CON MUCHO TEXTO Y SCROLL 👇 -->
+        <div id="finalPage">
+            <h2 class="final-msg">¡GRACIAS, MI AMOR!</h2>
+            
+            <div class="final-image-frame">
+                <img src="1.jpeg" 
+                     alt="Te amo" 
+                     class="final-gif">
+            </div>
+            
+            <!-- ===== DEDICATORIA LARGA - AHORA CON SCROLL ===== -->
+            <div class="dedicatoria-completa">
+                <div class="poema-titulo">
+                    Para ti, Elsa Judith ❤️
+                </div>
+                
+                <div class="mensaje-largo">
+                    <p style="margin-bottom: 18px; font-size: 1.4rem;">
+                        <span style="background: #ff4d6d; color: white; padding: 8px 22px; border-radius: 60px; display: inline-block;">
+                            💕 MI NIÑA HERMOSA 💕
+                        </span>
+                    </p>
+                    
+                    <p style="margin-bottom: 16px;">
+                        <strong style="font-size: 1.5rem;">"</strong> Desde que llegaste a mi vida,<br>
+                        <strong>todo tiene más color y sentido.</strong>
+                    </p>
+                    
+                    <p style="margin-bottom: 16px;">
+                        Tus ojos son mi lugar favorito en el mundo,<br>
+                        tienen esa luz que ilumina hasta mi alma<br>
+                        y me hace querer ser mejor cada día.
+                    </p>
+                    
+                    <p style="margin-bottom: 16px;">
+                        Tu sonrisa es mi razón para despertar feliz,<br>
+                        es la melodía más bonita que mis oídos han escuchado<br>
+                        y el regalo más hermoso que la vida me ha dado.
+                    </p>
+                    
+                    <div class="destacado-rosa">
+                        💖 ERES MI PERSONA FAVORITA EN TODO EL UNIVERSO 💖
+                    </div>
+                    
+                    <p style="margin-bottom: 16px;">
+                        No existe un solo día en que no agradezca por tenerte.<br>
+                        <strong>Contigo aprendí que el amor de verdad sí existe,</strong><br>
+                        y está en cada mensaje, cada llamada, cada te amo.
+                    </p>
+                    
+                    <p style="margin-bottom: 16px; font-size: 1.25rem;">
+                        Me encanta tu forma de reír, tu forma de hablar,<br>
+                        tu forma de ver la vida, tu forma de querer.<br>
+                        Me encanta TODO de ti, Elsa Judith.
+                    </p>
+                    
+                    <p style="margin-bottom: 16px;">
+                        Eres mi sueño hecho realidad,<br>
+                        mi historia de amor favorita,<br>
+                        mi lugar seguro, mi paz, mi felicidad.
+                    </p>
+                    
+                    <p style="margin: 28px 0 20px; font-size: 1.5rem; color: #c9184a; font-weight: 700;">
+                        ¿Me dejas amarte hoy, mañana<br>
+                        y todos los días de mi vida?
+                    </p>
+                    
+                    <p style="font-size: 1.3rem; font-style: italic; background: #fff0f2; padding: 16px; border-radius: 20px;">
+                        <span style="font-size: 1.8rem;">🤵👰</span><br>
+                        Porque no quiero solo un San Valentín...<br>
+                        <strong style="font-size: 1.6rem; color: #a4133c;">quiero TODOS los días a tu lado.</strong>
+                    </p>
+                    
+                    <p style="margin-top: 25px;">
+                        Quiero envejecer contigo,<br>
+                        verte canas, verte arrugas,<br>
+                        y aún así seguir diciéndote<br>
+                        <span style="font-size: 1.6rem; font-family: 'Great Vibes';">"Te amo más que ayer"</span>
+                    </p>
+                    
+                    <p style="margin-top: 25px; font-size: 1.2rem;">
+                        Tú y yo, Elsa.<br>
+                        <strong>Siempre tú y siempre yo.</strong>
+                    </p>
+                </div>
+                
+                <div class="promesa-amor">
+                    Tú y yo, por siempre.
+                </div>
+            </div>
+            
+            <div class="firma-final">
+                Te ama hasta el infinito y más allá,<br>
+                Jeremy Sebastian 💘
+            </div>
+            
+            <div class="fecha-especial">
+                💕 14 DE FEBRERO - NUESTRO PRIMER SAN VALENTÍN 💕
+                <br>
+                <span style="font-size: 0.9rem; opacity: 0.9;">Y EL PRIMERO DE MUCHOS QUE VIENEN</span>
+            </div>
+            
+            <!-- ESPACIO EXTRA PARA SEGUIR BAJANDO -->
+            <div style="height: 30px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURACIÓN CON SCROLL PERFECTO =====
+        const siBtn = document.getElementById('siBtn');
+        const noBtn = document.getElementById('noBtn');
+        const askPage = document.getElementById('askPage');
+        const finalPage = document.getElementById('finalPage');
+
+        // ===== CORAZONES DE FONDO =====
+        function crearCorazonesFondo() {
+            const container = document.getElementById('heartsBg');
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 28 + 18) + 'px';
+                heart.style.opacity = Math.random() * 0.12 + 0.04;
+                heart.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+                container.appendChild(heart);
+            }
+        }
+
+        // ===== BOTÓN NO - TIERNO Y ESTABLE =====
+        let noClickCount = 0;
+        const frasesTiernas = [
+            'No 💔', 
+            '¿Segura? 🥺', 
+            'Piénsalo 💭', 
+            'Me rompes 💔', 
+            'Por favor 🥹', 
+            '¿Sí? 🌹', 
+            'No me dejes 😭', 
+            'Seré el mejor 💘', 
+            'Te amo 💕', 
+            '¡Acepta! 💖'
+        ];
+
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            noClickCount++;
+            if (noClickCount <= frasesTiernas.length) {
+                noBtn.textContent = frasesTiernas[noClickCount - 1];
+            }
+            
+            // Corazón roto
+            const broken = document.createElement('div');
+            broken.innerHTML = '💔';
+            broken.style.position = 'fixed';
+            broken.style.left = e.clientX + 'px';
+            broken.style.top = e.clientY + 'px';
+            broken.style.fontSize = '40px';
+            broken.style.zIndex = '9999';
+            broken.style.pointerEvents = 'none';
+            broken.style.filter = 'drop-shadow(0 0 15px #ff4d6d)';
+            broken.style.animation = 'none';
+            document.body.appendChild(broken);
+            setTimeout(() => broken.remove(), 900);
+            
+            if (noClickCount > 5) {
+                noBtn.style.background = 'linear-gradient(145deg, #ffe6e9, #ffb3c1)';
+                noBtn.style.color = '#a4133c';
+            }
+            if (noClickCount > 8) {
+                noBtn.style.background = '#ff4d6d';
+                noBtn.style.color = 'white';
+                noBtn.textContent = '💗 ¡Está bien!';
+            }
+        });
+
+        // ===== BOTÓN SÍ - ACTIVA SCROLL =====
+        siBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Ocultar pregunta
+            askPage.style.display = 'none';
+            
+            // Mostrar página final (con scroll automático)
+            finalPage.style.display = 'block';
+            
+            // Celebrar
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const emoji = ['❤️', '💖', '💕', '🌸', '✨', '🎉', '💘', '🌹'];
+                    const el = document.createElement('div');
+                    el.innerHTML = emoji[Math.floor(Math.random() * emoji.length)];
+                    el.style.position = 'fixed';
+                    el.style.left = Math.random() * 100 + '%';
+                    el.style.top = '-20px';
+                    el.style.fontSize = (Math.random() * 35 + 25) + 'px';
+                    el.style.zIndex = '9999';
+                    el.style.pointerEvents = 'none';
+                    el.style.filter = 'drop-shadow(0 0 20px #ff4d6d)';
+                    el.style.transition = 'all 3.5s cubic-bezier(0.2, 0.8, 0.4, 1)';
+                    document.body.appendChild(el);
+                    
+                    setTimeout(() => {
+                        el.style.transform = `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 720}deg)`;
+                    }, 20);
+                    
+                    setTimeout(() => el.remove(), 3500);
+                }, i * 30);
+            }
+            
+            // 👉 LLEVAR AUTOMÁTICAMENTE AL INICIO DEL MENSAJE
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 50);
+            
+            // Vibrar si se puede
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate([30, 20, 30]);
+            }
+        });
+
+        // ===== INICIALIZAR =====
+        window.addEventListener('DOMContentLoaded', function() {
+            crearCorazonesFondo();
+            
+            // ✅ ACTIVAR SCROLL EN TODO EL BODY
+            document.body.style.overflowY = 'auto';
+            document.body.style.height = 'auto';
+            document.body.style.minHeight = '100vh';
+            
+            // Scroll suave
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+
+        // Mensaje en consola
+        console.log('%c🌸 Elsa Judith, lee todo hasta el final 🌸', 'color: #ff4d6d; font-size: 18px; font-weight: bold;');
+        console.log('%c💘 Te escribí esto con todo mi corazón 💘', 'color: white; font-size: 16px;');
+    </script>
+</body>
+</html>
